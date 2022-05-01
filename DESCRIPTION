@@ -1,0 +1,20 @@
+Package: AmazonBSR
+Type: Package
+Title: Comparing Amazon Product’s BSR and Category Rank to Number of Sales Per Day
+Version: 0.1.0
+Author: Heather Ward 
+Maintainer: <heatherlward@usf.edu>
+Description: This package allows users to compare an Amazon item’s daily sales data to the category and BSR ranks. Users will use this package by importing monthly sales data, along with daily Best Seller’s Rank (BSR) and Category Rankings (typically an average), to see how rank impacts daily sales. 
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    data.table,
+    dplyr,
+    ggplot2,
+    graphics,
+    lattice,
+    lubridate,
+    plyr,
+    readr,
+    textplot

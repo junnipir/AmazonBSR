@@ -1,0 +1,66 @@
+##import data
+Amazon_Data <- read.table(file.choose(), header= TRUE, sep = ",")
+Amazon_Data
+
+#load packages
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(tidyverse)
+
+#setting string factors to false
+options(stringsAsFactors = FALSE)
+
+##viewing data structure
+str(Amazon_Data)
+summary(Amazon_Data)
+
+##transform date to month/year
+###First check the class to see if it is  POSIXct
+class(Amazon_Data$date)
+
+
+##Transform the date
+Amazon_Data$date<- as.Date(Amazon_Data$date)
+class(Amazon_Data$date)
+class(now())
+
+
+##Separate out month and date
+
+Month<- format(Amazon_Data$date, format="%m")
+Month
+
+##Joining new variables
+join<- function(df,vect){
+  new.df<-cbind(df, vect)
+  return(new.df)
+}
+
+new_data <- join(Amazon_Data,Month)
+
+new_data
+
+##getting rid of NA for overall BSR mean
+mean(new_data$BSR_rank, na.rm= TRUE)
+
+Month_BSR_Average<- function(new_data %>%
+                               group_by(vect) %>%
+                               summarize(
+                                 Month_BSR_Average = mean(BSR_rank, na.rm=TRUE)
+ )
+                             
+                             Month_BSR_Average
+                             
+                             
+                             Month_BSR_Average <- function(df){
+                               group_by(vect) %>%
+                                 summarize(
+                                   new_df = mean(vect, na.rm=true)
+                                 )
+                             }
+                             
+                             
+                             
+                             
+                             

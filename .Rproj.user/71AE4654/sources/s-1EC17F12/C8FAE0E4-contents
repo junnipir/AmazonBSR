@@ -1,0 +1,38 @@
+##import data
+Amazon_Data <- read.table(file.choose(), header= TRUE, sep = ",")
+Amazon_Data
+
+#load packages
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(tidyverse)
+
+#setting string factors to false
+options(stringsAsFactors = FALSE)
+
+##viewing data structure
+str(Amazon_Data)
+summary(Amazon_Data)
+
+##transform date to month/year
+###First check the class to see if it is  POSIXct
+class(Amazon_Data$date)
+
+##Transform the date
+Amazon_Data$date<- as.Date(Amazon_Data$date)
+class(Amazon_Data$date)
+class(now())
+
+##Separate out month and date
+
+Month<- format(Amazon_Data$date, format="%m")
+Month
+
+
+Date_to_Month<- function(df,vect){
+  new.df<-cbind(df, vect)
+  return(new.df)
+}
+
+Date_to_Month(Amazon_Data,Month)

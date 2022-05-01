@@ -1,0 +1,83 @@
+##import data
+Amazon_Data <- read.table(file.choose(), header= TRUE, sep = ",")
+Amazon_Data
+
+#load packages
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(tidyverse)
+
+#setting string factors to false
+options(stringsAsFactors = FALSE)
+
+##viewing data structure
+str(Amazon_Data)
+summary(Amazon_Data)
+
+##transform date to month/year
+###First check the class to see if it is  POSIXct
+class(Amazon_Data$date)
+
+
+##Transform the date
+Amazon_Data$date<- as.Date(Amazon_Data$date)
+class(Amazon_Data$date)
+class(now())
+
+
+##Separate out month and date
+
+Month<- format(Amazon_Data$date, format="%m")
+Month
+
+##Joining new variables
+join<- function(df,vect){
+  new.df<-cbind(df, vect)
+  return(new.df)
+}
+
+new_data <- join(Amazon_Data,Month)
+
+
+##getting rid of NA for overall BSR mean
+na.rm=TRUE
+Totalmean<- function(df){
+  Totalmean<- mean(df, na.rm= TRUE)
+  return(Totalmean)
+}
+
+Totalmean(new_data$BSR_rank)
+Totalmean(new_data$units_sold)
+Totalmean(new_data$category_rank)
+
+
+Month_BSR_Average<- new_data %>%
+  group_by(vect) %>%
+  summarize(
+    Month_BSR_Average = mean(BSR_rank, na.rm=TRUE)
+  )
+
+Month_BSR_Average
+
+ggplot()+
+  geom_line(data= new_data, mapping=aes(x=date, y=BSR_rank ), color="blue")+
+  geom_point(data= new_data, mapping=aes(x=date, y=BSR_rank ), color="blue")+
+  geom_line(data= new_data, mapping=aes(x=date, y=units_sold ), color="orange")+
+  geom_point(data= new_data, mapping=aes(x=date, y=units_sold ), color="orange")
+
+
+plot_BSR<- function(my_data){
+  ggplot()+
+    geom_line(data= my_data, mapping=aes(x=date, y=BSR_rank ), color="blue")+
+    geom_point(data= my_data, mapping=aes(x=date, y=BSR_rank ), color="blue")+
+    geom_line(data= my_data, mapping=aes(x=date, y=units_sold ), color="orange")+
+    geom_point(data= my_data, mapping=aes(x=date, y=units_sold ), color="orange")
+  
+}
+  
+plot_BSR(new_data)
+
+
+
+
