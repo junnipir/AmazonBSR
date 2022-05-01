@@ -17,12 +17,13 @@ tidyverse(echo=TRUE)
 ```
 
 #These quick functions will be used to get to know the data and see what data we have to work with. Please know that "my_data" will be used to represent the dataset that will be loaded into R.
+```{r}
 str(my_data)
 summary(my_data)
 plot(my_data)
 ```
 
-```
+
 #Data will then need to be transformed into date format as sometimes the dates pull through as Character. This all depends on the type of data you're inputting. The functions used in this package require POSIXct class.  
 class(my_data)
 as.Date(my_data)
