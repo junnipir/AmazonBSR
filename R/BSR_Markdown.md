@@ -30,7 +30,7 @@ as.Date(my_data)
 
 
 
-#Then you will need to use the following functions.
+##Then you will need to use the following functions.
 
 #The Totalmean function removes any NA datapoints so you can find the total combined mean for a data column. This is useful for comparing parsed data to the overall dataset. 
 ``` {r}
